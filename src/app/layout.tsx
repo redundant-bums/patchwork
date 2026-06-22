@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { Quicksand } from "next/font/google";
+import { Quicksand } from "next/font/google"; // 1. Removed Figtree
 import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
+import { cn } from "@/lib/utils";
 
 const quicksand = Quicksand({
   subsets: ["latin"],
-  variable: "--font-quicksand", 
+  variable: "--font-sans", 
 });
 
 export const metadata: Metadata = {
@@ -21,10 +22,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className="h-full antialiased"
+      className={cn("h-full antialiased font-sans", quicksand.variable)}
       suppressHydrationWarning
     >
-      <body className={`${quicksand.className} min-h-full flex flex-col`}>
+      <body className="min-h-full flex flex-col">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

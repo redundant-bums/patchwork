@@ -1,4 +1,5 @@
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { Card, CardTitle } from "@/components/ui/card";
 
 export default function Home() {
   const boards = [
@@ -17,14 +18,16 @@ export default function Home() {
 
       <main className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1 min-h-0">
         {boards.map((board) => (
-          <button
+          <Card
             key={board.id}
-            className="flex items-center justify-center p-8 bg-foreground rounded-2xl border-2 border-transparent hover:border-accent hover:shadow-md transition-all duration-200 group"
+            role="button"
+            tabIndex={0}
+            className="flex items-center justify-center p-8 bg-foreground rounded-2xl border-2 border-transparent hover:border-accent hover:shadow-md transition-all duration-200 group cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
           >
-            <span className="text-2xl font-semibold group-hover:-translate-y-1 transition-transform duration-200">
+            <CardTitle className="text-2xl font-semibold group-hover:-translate-y-1 transition-transform duration-200 border-none">
               {board.title}
-            </span>
-          </button>
+            </CardTitle>
+          </Card>
         ))}
       </main>
     </div>
