@@ -1,3 +1,5 @@
+import { ThemeToggle } from "@/components/ui/theme-toggle";
+
 export default function Home() {
   const boards = [
     { id: 1, title: "Family Vacation" },
@@ -8,8 +10,9 @@ export default function Home() {
 
   return (
     <div className="flex flex-col flex-1 p-8 h-full bg-background text-text-primary">
-      <header className="mb-8">
+      <header className="mb-8 flex justify-between items-center">
         <h1 className="text-4xl font-bold tracking-tight">My Boards</h1>
+        <ThemeToggle />
       </header>
 
       <main className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1 min-h-0">
