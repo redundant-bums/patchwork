@@ -1,4 +1,4 @@
-import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { ThemeToggle } from "@/features/theme/theme-toggle";
 import { Card, CardTitle } from "@/components/ui/card";
 
 export default function Home() {
