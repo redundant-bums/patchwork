@@ -1,4 +1,3 @@
-import { ThemeToggle } from "@/features/theme/theme-toggle";
 import { Card, CardTitle } from "@/components/ui/card";
 import Header from "@/components/layout/header";
 
@@ -15,7 +14,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col h-screen bg-background text-text-primary overflow-hidden">
-      <Header title={"My Boards"} rightActions={<ThemeToggle />}></Header>
+      <Header title={"My Boards"}></Header>
       <main className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1 min-h-0 overflow-y-auto auto-rows-[calc(50%-0.75rem)] p-page">
         {boards.map((board) => (
           <Card

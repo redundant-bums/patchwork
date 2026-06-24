@@ -7,7 +7,7 @@ interface HeaderProps {
   rightActions?: React.ReactNode;
 }
 
-export default function Header({ title, leftActions, rightActions }: HeaderProps) {
+export default function Header({ title, rightActions }: HeaderProps) {
   return (
     <header className="p-page flex items-center justify-between shrink-0 border-b-2 border-text-primary">
       <div className="flex flex-1 items-center justify-start gap-4">
