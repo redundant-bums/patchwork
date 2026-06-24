@@ -11,8 +11,8 @@ export function ThemeToggle() {
   const isDark = resolvedTheme === "dark";
 
   return (
-    <div 
-      className="flex w-full items-center justify-between" 
+    <div
+      className="flex w-full items-center justify-between"
       suppressHydrationWarning
     >
       <Label htmlFor="darkMode">Dark Mode</Label>

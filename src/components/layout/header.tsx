@@ -13,11 +13,9 @@ export default function Header({ title, rightActions }: HeaderProps) {
       <div className="flex flex-1 items-center justify-start gap-4">
         <UserAvatarButton />
       </div>
-      
-      <h1 className="header-main shrink-0 text-center px-4">
-        {title}
-      </h1>
-      
+
+      <h1 className="header-main shrink-0 text-center px-4">{title}</h1>
+
       <div className="flex flex-1 items-center justify-end gap-4">
         {rightActions}
       </div>

@@ -1,53 +1,70 @@
 "use client";
 
+import { Settings, Moon, LogOut } from "lucide-react";
 import { IconButton } from "@/components/ui/icon-button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ThemeToggle } from "../theme/theme-toggle";
 import { Label } from "@/components/ui/label";
 
+const Separator = () => (
+  <DropdownMenuSeparator className="mx-2 bg-text-primary/30" />
+);
+
 export default function UserAvatarButton() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <IconButton 
-          onClick={() => console.log("clicked")}
-          aria-label="Open User Settings Menu"
-        >
-          AV
-        </IconButton>
+        <IconButton aria-label="Open User Settings Menu">AV</IconButton>
       </DropdownMenuTrigger>
-      
-      <DropdownMenuContent 
-        align="end" 
-        className="ml-4 border-none bg-[var(--foreground)] text-[var(--primary)] shadow-lg"
+
+      <DropdownMenuContent
+        align="end"
+        className="ml-4 border border-text-primary bg-foreground text-text-primary shadow-none"
       >
-        <DropdownMenuItem 
+        <DropdownMenuLabel className="flex flex-col space-y-1.5 px-3 py-2.5">
+          <Label htmlFor="userFullName">Andie Vester</Label>
+          <span className="text-xs leading-none opacity-70">
+            avester146@gmail.com
+          </span>
+        </DropdownMenuLabel>
+
+        <Separator />
+
+        <DropdownMenuItem
           onClick={() => console.log("Account Settings clicked")}
-          className="focus:bg-[var(--background)]/20 focus:text-[var(--primary)]"
+          className="focus:bg-background/20 focus:text-text-primary"
         >
-           <Label className="cursor-pointer" htmlFor="accountSettings">Account Settings</Label>
+          <Settings className="h-4 w-4" />
+          <Label className="cursor-pointer" htmlFor="accountSettings">
+            Account Settings
+          </Label>
         </DropdownMenuItem>
 
-        <DropdownMenuItem 
+        <DropdownMenuItem
           onSelect={(e) => e.preventDefault()}
-          className="focus:bg-transparent focus:text-[var(--primary)]"
+          className="focus:bg-transparent focus:text-text-primary"
         >
+          <Moon className="h-4 w-4" />
           <ThemeToggle />
         </DropdownMenuItem>
-        
-        <DropdownMenuSeparator className="mx-2 bg-[var(--accent)]" />
-        
-        <DropdownMenuItem 
+
+        <Separator />
+
+        <DropdownMenuItem
           onClick={() => console.log("Logout clicked")}
-          className="text-[var(--error)] focus:bg-[var(--error)]/10 focus:text-[var(--error)]"
+          className="text-error focus:bg-error/10 focus:text-error"
         >
-           <Label className="cursor-pointer" htmlFor="logout">Log out</Label>
+          <LogOut className="h-4 w-4" />
+          <Label className="cursor-pointer" htmlFor="logout">
+            Log out
+          </Label>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
