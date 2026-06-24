@@ -1,5 +1,8 @@
-import { ThemeToggle } from "@/features/theme/theme-toggle";
+"use client";
+
 import { Card, CardTitle } from "@/components/ui/card";
+import Header from "@/components/layout/header";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const boards = [
@@ -7,24 +10,33 @@ export default function Home() {
     { id: 2, title: "Wild Iris Climbing Trip" },
     { id: 3, title: "Kyrgyzstan" },
     { id: 4, title: "Dinner Party" },
+    { id: 5, title: "Kilby Block Party" },
+    { id: 6, title: "Christmas 2025" },
+    { id: 7, title: "Zion National Park" },
   ];
 
   return (
-    <div className="flex flex-col flex-1 p-8 h-full bg-background text-text-primary">
-      <header className="mb-8 flex justify-between items-center">
-        <h1 className="text-4xl font-bold tracking-tight">My Boards</h1>
-        <ThemeToggle />
-      </header>
-
-      <main className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1 min-h-0">
+    <div className="flex h-screen flex-col overflow-hidden bg-background text-text-primary">
+      <Header
+        title={"My Boards"}
+        rightActions={
+          <Button
+            onClick={() => console.log("Create Board clicked!")}
+            className="btn-surface h-auto rounded-2xl px-5 py-2 text-md"
+          >
+            Create Board
+          </Button>
+        }
+      />
+      <main className="grid min-h-0 flex-1 auto-rows-[calc(50%-0.75rem)] grid-cols-1 gap-6 overflow-y-auto p-page md:grid-cols-2">
         {boards.map((board) => (
           <Card
             key={board.id}
             role="button"
             tabIndex={0}
-            className="flex items-center justify-center p-8 bg-foreground rounded-2xl border-2 border-transparent hover:border-accent hover:shadow-md transition-all duration-200 group cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+            className="group flex cursor-pointer items-center justify-center rounded-2xl border-2 border-transparent bg-foreground transition-all duration-200 hover:border-accent focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
           >
-            <CardTitle className="text-2xl font-semibold group-hover:-translate-y-1 transition-transform duration-200 border-none">
+            <CardTitle className="border-none text-center text-3xl font-semibold transition-transform duration-200 group-hover:-translate-y-1">
               {board.title}
             </CardTitle>
           </Card>
