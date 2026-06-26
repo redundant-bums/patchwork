@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ThemeToggle } from "../theme/theme-toggle";
 import { Label } from "@/components/ui/label";
+import Link from "next/link";
 
 const Separator = () => (
   <DropdownMenuSeparator className="mx-2 bg-text-primary/30" />
@@ -26,7 +27,7 @@ export default function UserAvatarButton() {
 
       <DropdownMenuContent
         align="end"
-        className="ml-4 border border-text-primary bg-foreground text-text-primary shadow-none"
+        className="border border-text-primary bg-foreground text-text-primary shadow-none"
       >
         <DropdownMenuLabel className="flex flex-col space-y-1.5 px-3 py-2.5">
           <Label htmlFor="userFullName">Andie Vester</Label>
@@ -38,13 +39,18 @@ export default function UserAvatarButton() {
         <Separator />
 
         <DropdownMenuItem
-          onClick={() => console.log("Account Settings clicked")}
+          asChild
           className="focus:bg-background/20 focus:text-text-primary"
         >
-          <Settings className="h-4 w-4" />
-          <Label className="cursor-pointer" htmlFor="accountSettings">
-            Account Settings
-          </Label>
+          <Link
+            href="/settings"
+            className="flex w-full items-center gap-2 cursor-pointer"
+          >
+            <Settings className="h-4 w-4" />
+            <Label className="cursor-pointer" htmlFor="accountSettings">
+              Account Settings
+            </Label>
+          </Link>
         </DropdownMenuItem>
 
         <DropdownMenuItem

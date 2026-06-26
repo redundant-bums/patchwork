@@ -2,33 +2,45 @@ import Header from "@/components/layout/header";
 import { Button } from "@/components/ui/button";
 import { notFound } from "next/navigation";
 
+// mock fetcher
+async function getBoardById(id: string) {
+  const mockBoards = [
+    { id: "1", title: "Family Vacation" },
+    { id: "2", title: "Wild Iris Climbing Trip" },
+    { id: "3", title: "Kyrgyzstan" },
+    { id: "4", title: "Dinner Party" },
+    { id: "5", title: "Kilby Block Party" },
+    { id: "6", title: "Christmas 2025" },
+    { id: "7", title: "Zion National Park" },
+  ];
+
+  return mockBoards.find((b) => b.id === id) || null;
+}
+
 export default async function BoardPage({
   params,
-  searchParams,
 }: {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{ title?: string }>;
 }) {
   const resolvedParams = await params;
-  const resolvedSearchParams = await searchParams;
-
   const boardId = resolvedParams.id;
-  const boardTitle = resolvedSearchParams.title;
 
-  if (!boardId || !boardTitle) {
+  const board = await getBoardById(boardId);
+
+  if (!board) {
     notFound();
   }
 
   return (
     <>
       <Header
-        title={boardTitle}
+        title={board.title}
         rightActions={
           <Button className="btn-surface btn-std">Upload Photo</Button>
         }
       />
-      <main>
-        <h1>Welcome to {boardTitle}</h1>
+      <main className="flex flex-1 items-center justify-center">
+        <h1>{board.title}</h1>
       </main>
     </>
   );

@@ -36,7 +36,6 @@ export default function HomePage() {
             key={board.id}
             href={{
               pathname: `/board/${board.id}`,
-              query: { title: board.title },
             }}
             className="contents"
           >
