@@ -1,23 +1,35 @@
+import Header from "@/components/layout/header";
+import { Button } from "@/components/ui/button";
 import { notFound } from "next/navigation";
 
 export default async function BoardPage({
   params,
+  searchParams,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ title?: string }>;
 }) {
-  const boardId = params.id;
+  const resolvedParams = await params;
+  const resolvedSearchParams = await searchParams;
 
-  const board = {
-    title: "test",
-  };
+  const boardId = resolvedParams.id;
+  const boardTitle = resolvedSearchParams.title;
 
-  if (!board) {
+  if (!boardId || !boardTitle) {
     notFound();
   }
 
   return (
-    <div>
-      <h1>{board.title}</h1>
-    </div>
+    <>
+      <Header
+        title={boardTitle}
+        rightActions={
+          <Button className="btn-surface btn-std">Upload Photo</Button>
+        }
+      />
+      <main>
+        <h1>Welcome to {boardTitle}</h1>
+      </main>
+    </>
   );
 }

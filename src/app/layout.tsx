@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 const quicksand = Quicksand({
   subsets: ["latin"],
-  variable: "--font-sans", 
+  variable: "--font-sans",
 });
 
 export const metadata: Metadata = {
@@ -25,7 +25,7 @@ export default function RootLayout({
       className={cn("h-full antialiased font-sans", quicksand.variable)}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">
+      <body className="page-root">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
