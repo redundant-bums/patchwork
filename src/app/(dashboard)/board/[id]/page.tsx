@@ -1,7 +1,7 @@
 import Header from "@/components/layout/header";
 import { Button } from "@/components/ui/button";
 import { notFound } from "next/navigation";
-
+export const runtime = "edge";
 // mock fetcher
 async function getBoardById(id: string) {
   const mockBoards = [
