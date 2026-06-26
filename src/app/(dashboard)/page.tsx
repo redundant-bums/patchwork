@@ -4,7 +4,7 @@ import { Card, CardTitle } from "@/components/ui/card";
 import Header from "@/components/layout/header";
 import { Button } from "@/components/ui/button";
 
-export default function Home() {
+export default function HomePage() {
   const boards = [
     { id: 1, title: "Family Vacation" },
     { id: 2, title: "Wild Iris Climbing Trip" },
