@@ -3,8 +3,10 @@
 import { Card, CardTitle } from "@/components/ui/card";
 import Header from "@/components/layout/header";
 import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import Link from "next/link";
 
-export default function Home() {
+export default function HomePage() {
   const boards = [
     { id: 1, title: "Family Vacation" },
     { id: 2, title: "Wild Iris Climbing Trip" },
@@ -16,13 +18,13 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex h-screen flex-col overflow-hidden bg-background text-text-primary">
+    <>
       <Header
         title={"My Boards"}
         rightActions={
           <Button
             onClick={() => console.log("Create Board clicked!")}
-            className="btn-surface h-auto rounded-2xl px-5 py-2 text-md"
+            className="btn-surface btn-std"
           >
             Create Board
           </Button>
@@ -30,18 +32,25 @@ export default function Home() {
       />
       <main className="grid min-h-0 flex-1 auto-rows-[calc(50%-0.75rem)] grid-cols-1 gap-6 overflow-y-auto p-page md:grid-cols-2">
         {boards.map((board) => (
-          <Card
+          <Link
             key={board.id}
-            role="button"
-            tabIndex={0}
-            className="group flex cursor-pointer items-center justify-center rounded-2xl border-2 border-transparent bg-foreground transition-all duration-200 hover:border-accent focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+            href={{
+              pathname: `/board/${board.id}`,
+            }}
+            className="contents"
           >
-            <CardTitle className="border-none text-center text-3xl font-semibold transition-transform duration-200 group-hover:-translate-y-1">
-              {board.title}
-            </CardTitle>
-          </Card>
+            <Card
+              role="button"
+              tabIndex={0}
+              className="group flex h-full cursor-pointer items-center justify-center rounded-2xl border-2 border-transparent bg-foreground transition-all duration-200 hover:border-accent focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+            >
+              <CardTitle className="border-none text-center text-3xl font-semibold transition-transform duration-200 group-hover:-translate-y-1">
+                {board.title}
+              </CardTitle>
+            </Card>
+          </Link>
         ))}
       </main>
-    </div>
+    </>
   );
 }

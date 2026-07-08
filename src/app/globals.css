@@ -22,7 +22,6 @@
   --error: #ee3f3f;
 }
 
-/* Map custom variables to Tailwind's utility classes */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -36,12 +35,20 @@
   --spacing-page: 1.5rem;
 }
 
+@utility page-root {
+  @apply flex h-screen flex-col overflow-hidden;
+}
+
 @utility header-main {
   @apply text-4xl font-bold tracking-tight;
 }
 
 @utility btn-surface {
   @apply border! border-text-primary! bg-foreground text-text-primary transition-colors hover:bg-accent hover:text-background;
+}
+
+@utility btn-std {
+  @apply rounded-2xl px-5 py-2;
 }
 
 @layer base {
