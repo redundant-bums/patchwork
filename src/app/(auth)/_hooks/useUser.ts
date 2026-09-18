@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { createClient } from "@/utils/supabase/client";
 
-export function useUser() {
-  const supabase = createClient();
+const supabase = createClient();
 
+export function useUser() {
   return useQuery({
     queryKey: ["user"],
     queryFn: async () => {

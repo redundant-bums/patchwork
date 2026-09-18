@@ -29,7 +29,7 @@
   --color-accent: var(--accent);
   --color-success: var(--success);
   --color-error: var(--error);
-  --color-destructive: var(--color-red);
+  --color-destructive: var(--color-error);
   --color-muted-foreground: color-mix(
     in srgb,
     var(--color-text-primary) 80%,

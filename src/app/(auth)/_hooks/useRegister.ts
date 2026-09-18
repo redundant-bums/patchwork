@@ -4,6 +4,7 @@ import { register } from "../actions";
 interface AuthCredentials {
   email: string;
   password: string;
+  username?: string;
 }
 
 export function useRegister() {
@@ -12,6 +13,9 @@ export function useRegister() {
       const formData = new FormData();
       formData.append("email", credentials.email);
       formData.append("password", credentials.password);
+      if (credentials.username) {
+        formData.append("username", credentials.username);
+      }
 
       const response = await register(formData);
 

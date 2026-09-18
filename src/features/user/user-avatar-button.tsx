@@ -23,10 +23,13 @@ export default function UserAvatarButton() {
   const { mutate: logout, isPending } = useLogout();
   const { data: user } = useUser();
 
+  const username = user?.user_metadata?.username as string | undefined;
+  const initial = (username?.[0] || user?.email?.[0] || "").toUpperCase();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <IconButton aria-label="Open User Settings Menu">AV</IconButton>
+        <IconButton aria-label="Open User Settings Menu">{initial}</IconButton>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
@@ -34,12 +37,11 @@ export default function UserAvatarButton() {
         className="border border-text-primary bg-foreground text-text-primary shadow-none"
       >
         <DropdownMenuLabel className="flex flex-col space-y-1.5 px-3 py-2.5">
-          <Label htmlFor="userFullName">Andie Vester</Label>
+          <Label htmlFor="userFullName">{username || "User"}</Label>
           <span className="text-xs leading-none opacity-70">
             {user?.email || "Loading..."}
           </span>
         </DropdownMenuLabel>
-
         <Separator />
 
         <DropdownMenuItem

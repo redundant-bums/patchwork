@@ -16,19 +16,23 @@ import { useLogin } from "../_hooks/useLogin";
 import { useRegister } from "../_hooks/useRegister";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import { toast } from "sonner";
 
 const loginSchema = z.object({
-  email: z.email({ error: "Please enter a valid email address." }),
+  email: z.string().min(1, "Email or username is required."),
   password: z.string().min(1, "Password is required."),
 });
 
 const signupSchema = z.object({
-  email: z.email({ error: "Please enter a valid email address." }),
+  email: z.email({ message: "Please enter a valid email address." }),
+  username: z.string().min(1, "Username is required."),
   password: z.string().min(8, "Password must be at least 8 characters."),
 });
 
-type AuthFormValues = z.infer<typeof signupSchema>;
+type AuthFormValues = {
+  email: string;
+  password: string;
+  username?: string;
+};
 
 interface AuthFormProps {
   mode: "login" | "signup";
@@ -48,30 +52,31 @@ export function AuthForm({ mode }: AuthFormProps) {
     defaultValues: {
       email: "",
       password: "",
+      username: "",
     },
   });
 
   function onSubmit(data: AuthFormValues) {
     if (isLogin) {
-      login(data, {
-        onSuccess: () => {
-          queryClient.invalidateQueries({ queryKey: ["user"] });
-          router.push("/");
-          router.refresh();
-        },
-        onError: (error) => {
-          form.setError("root", {
-            type: "server",
-            message: error.message,
-          });
-        },
-      });
+      login(
+        { email: data.email, password: data.password },
+        {
+          onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["user"] });
+            router.push("/");
+            router.refresh();
+          },
+          onError: (error) => {
+            form.setError("root", {
+              type: "server",
+              message: error.message,
+            });
+          },
+        }
+      );
     } else {
       register(data, {
         onSuccess: () => {
-          toast.success("Registration successful", {
-            description: "Please log in with your new credentials.",
-          });
           router.push("/login");
         },
         onError: (error) => {
@@ -99,16 +104,41 @@ export function AuthForm({ mode }: AuthFormProps) {
       )}
 
       <FieldGroup>
+        {!isLogin && (
+          <Controller
+            name="username"
+            control={form.control}
+            render={({ field, fieldState }) => (
+              <Field data-invalid={fieldState.invalid}>
+                <FieldLabel htmlFor={`${mode}-username-input`}>
+                  Username
+                </FieldLabel>
+                <Input
+                  {...field}
+                  id={`${mode}-username-input`}
+                  type="text"
+                  aria-invalid={fieldState.invalid}
+                />
+                {fieldState.invalid && (
+                  <FieldError errors={[fieldState.error]} />
+                )}
+              </Field>
+            )}
+          />
+        )}
+
         <Controller
           name="email"
           control={form.control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
-              <FieldLabel htmlFor={`${mode}-email-input`}>Email</FieldLabel>
+              <FieldLabel htmlFor={`${mode}-email-input`}>
+                {isLogin ? "Email or Username" : "Email"}
+              </FieldLabel>
               <Input
                 {...field}
                 id={`${mode}-email-input`}
-                type="email"
+                type={isLogin ? "text" : "email"}
                 aria-invalid={fieldState.invalid}
               />
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
