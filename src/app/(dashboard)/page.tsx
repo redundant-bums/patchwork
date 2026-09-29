@@ -3,7 +3,6 @@
 import { Card, CardTitle } from "@/components/ui/card";
 import Header from "@/components/layout/header";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
 import Link from "next/link";
 
 export default function HomePage() {
